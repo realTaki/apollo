@@ -73,6 +73,23 @@ build --cxxopt="-std=c++14"
 build --host_cxxopt="-std=c++14"
 
 # +------------------------------------------------------------+
+# | TODO  插桩                                                  |
+# +------------------------------------------------------------+
+build --javabase="@bazel_tools//tools/jdk:remote_jdk11"
+# coverage --host_javabase="@bazel_tools//tools/jdk:remote_jdk11"
+# build --instrument_test_targets
+# build --combined_report=lcov
+# build --nocache_test_results
+# coverage --coverage_report_generator="@bazel_tools//tools/test/CoverageOutputGenerator/java/com/google/devtools/coverageoutputgenerator:Main"
+build --copt=--coverage
+build --copt=-fprofile-arcs
+build --copt=-ftest-coverage
+build --cxxopt=--coverage
+build --cxxopt=-fprofile-arcs
+build --cxxopt=-ftest-coverage
+build --linkopt=-lgcov
+
+# +------------------------------------------------------------+
 # | Test Configurations                                        |
 # +------------------------------------------------------------+
 test --flaky_test_attempts=3
